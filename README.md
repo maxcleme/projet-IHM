@@ -8,6 +8,8 @@
 - Vote des étudiants
 - Génération des .ics personnalisés pour chaque étudiant/prof
 
+- INSTALLER MONGODB
+
 ## Méthodes API
 
 - Ajouter EDT    : 			PUT /emploidutemps

@@ -9,6 +9,7 @@
 - Génération des .ics personnalisés pour chaque étudiant/prof
 
 - INSTALLER MONGODB
+- DEMARRER MONGODB AVANT DE LANCER LE SERVEUR
 
 ## Méthodes API
 
@@ -18,10 +19,13 @@ Object TimeTable : { id, nom, imagePath, nbVote }
 - TimeTableController :
 
 	Ajouter un emploi du temps :
-		PUT /timetable/{nom} + "file" dans le corp de la requette ( cf l'envoi de fichier dans FTP )
+		POST /timetable 
+		Dans le corp de la requette :
+			- "nom"
+			- "file"  ( cf l'envoi de fichier dans FTP : multipart/form-data )
 		Retour : Un objet TimeTable 
 		
-		Rq : Le nombre de vote est initialisé à 0.
+		Rq : Le nombre de vote est initialisé à 0. Un exemple de formulaire est disponible dans src/main/java/webapp/WEB-INF/jsp/index.jsp
 		
 	Lister les emplois du temps :
 		GET /timetable

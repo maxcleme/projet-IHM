@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,14 @@ public class TimeTableController {
     TimeTableRepository timeTableRepository;
 
     @RequestMapping( method = RequestMethod.GET )
-    public List< TimeTable > createTimeTable() {
+    public List< TimeTable > createTimeTable( @RequestParam( value = "order" , required = false ) final String order ) {
+        if ( order != null ) {
+            if ( "ASC".equals( order.toUpperCase().trim() ) ) {
+                return this.timeTableRepository.findAll( new Sort( Sort.Direction.ASC, "nom" ) );
+            } else if ( "DESC".equals( order.toUpperCase().trim() ) ) {
+                return this.timeTableRepository.findAll( new Sort( Sort.Direction.DESC, "nom" ) );
+            }
+        }
         return this.timeTableRepository.findAll();
     }
 

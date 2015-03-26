@@ -31,6 +31,10 @@ Object TimeTable : { id, nom, imagePath, nbVote }
 		GET /timetable
 		Retour : La liste des emplois du temps
 		
+		GET /timetable?order={order}
+		order = ASC | DESC
+		
+		
 TODO : Parametrage optionnel sur le GET pour filtrer la liste.
 	
 - Vote :

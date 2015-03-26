@@ -12,12 +12,40 @@
 
 ## Méthodes API
 
-- Ajouter EDT    : 			PUT /emploidutemps
-						{ nom : 'Nom'}
-- Stockage image : 			PUT /image
-- Liste des EDT  : 			GET /emploidutemps(/column/order) <- Route optionnelle
-						[{ nom: 'Nom', image: 'Image.png', votes : 6 }, { nom: 'Nom2', image: 'Image2.png', votes : 9 }]
-- Vote           : 			PUT /vote/iduser/idemploidutemps
-- Annuler vote	 :			DELETE /vote/iduser/idemploidutemps
+Object TimeTable : { id, nom, imagePath, nbVote }
+
+
+- TimeTableController :
+
+	Ajouter un emploi du temps :
+		PUT /timetable/{nom} + "file" dans le corp de la requette ( cf l'envoi de fichier dans FTP )
+		Retour : Un objet TimeTable 
+		
+		Rq : Le nombre de vote est initialisé à 0.
+		
+	Lister les emplois du temps :
+		GET /timetable
+		Retour : La liste des emplois du temps
+		
+TODO : Parametrage optionnel sur le GET pour filtrer la liste.
+	
+- Vote :
+
+	Ajouter un vode :
+		PUT /vote/{idUser}/{idTimeTable}
+		Retour : Un message de succes ou d'erreur.
+		
+		Rq : L'objet TimeTable d'id {idTableTable} est incrémenté de un. Le nombre de vote par Utilisateur est parametré sur 3.
+		
+	Supprimer un vote :
+		DELETE /vote/{idUser}/{idTimeTable}
+		Retour : Un message de succes ou d'erreur.
+		
+		Rq : L'objet TimeTable d'id {idTableTable} est decincrémenté de un.
+		
+	
+		
+
+
 
 

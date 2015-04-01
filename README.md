@@ -11,6 +11,17 @@
 - INSTALLER MONGODB
 - DEMARRER MONGODB AVANT DE LANCER LE SERVEUR
 
+
+## Accès au resource
+
+Les resources nécéssaires à la parti WEB sont placé dans :
+	
+	src/main/java/resources/public
+	
+Elles sont ensuites accessible par :
+
+	localhost:8080/{nomDeLaRessource}
+
 ## Méthodes API
 
 Object TimeTable : { id, nom, imagePath, nbVote }
@@ -51,7 +62,30 @@ TODO : Parametrage optionnel sur le GET pour filtrer la liste.
 		
 		Rq : L'objet TimeTable d'id {idTableTable} est decincrémenté de un.
 		
-	
+- Contrainte :
+
+	Lister les contraintes :
+		GET /list/{idUser}
+		Retour : une liste d'objet Contrainte
+		
+	Ajouter une contrainte :
+		POST /add/{idUser}
+		Dans le corp de la requette :
+			- "motif"
+			- "importance"
+		Retour : Un objet Contrainte
+		
+	Modifier une contrainte :
+		POST /update/{idUser}
+		Dans le corp de la requette :
+			- "id"
+			- "motif"
+			- "importance"
+		Retour : Un objet Contrainte
+		
+	Supprimer une contrainte :	
+		DELETE /delete/{idUser}/{idContrainte}
+		Retour : void
 		
 
 

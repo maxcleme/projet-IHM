@@ -25,7 +25,7 @@ public class VoteController {
     @Autowired
     VoteRepository           voteRepository;
 
-    @RequestMapping( value = "/{idUser}/{idTimeTable}" , method = RequestMethod.PUT )
+    @RequestMapping( value = "/{idUser}/{idTimeTable}" , method = RequestMethod.POST )
     public String addVote( @PathVariable( "idUser" ) final String idUser , @PathVariable( "idTimeTable" ) final String idTimeTable ) {
         final TimeTable timeTable = this.timeTableRepository.findById( idTimeTable );
         if ( timeTable == null ) {

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Filandar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/contrainte.css" media="screen">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" media="screen">
+     
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
+      <script src="../bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Filandar - <strong>Votre</strong> calendrier</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 100px;">
+   
+      <div class="jumbotron form-horizontal"  id="div-ajouter-contrainte">
+        <h3>Ajouter une contrainte</h3>
+        <div class="col-md-4 form-group">
+           <input class="form-control col-md-3" name="motif" id="motif" placeholder="Saisir un motif" autocomplete="off"/>
+        </div>
+        <div class="col-md-4 form-group">
+        <select size="1" name="niveau" id="niveau" class="form-control col-md-4" autocomplete="off">
+          <option >Saisir un niveau de priorité</option>
+          <option>Indispensable</option>
+          <option>Préférable</option>
+          <option>Souhaité</option>
+        </select>
+      </div>
+      <br>
+
+      <div style="float:right;margin:0px;">
+         <span class="btn btn-info"  id="contrainte-exemple"><span>--</span><em>--</em></span>
+      </div>
+     
+      </div>
+      <div class="jumbotron">
+          <table id="calendar-contraint">
+            <tr><th></th><th>Lundi</th><th>Mardi</th><th>Mercredi</th><th>Jeudi</th><th>Vendredi</th><th>Samedi</th></tr>
+            <tr><th>8h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>8h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>9h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>9h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>10h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>10h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>11h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>11h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>12h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>12h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>13h00</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>13h30</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </table>
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script>
+
+      var niveau  = false;
+      var motif   = false;
+      var deletable = false;
+      $("#contrainte-exemple").draggable({revert : true});
+      $( "#calendar-contraint td" ).droppable({
+          drop: function( event, ui ) {
+            if(motif && niveau){
+              $(this).append("<span class='btn btn-info' onClick='supprimer(this);'>" + $(ui.draggable).html() + "</span>");
+            }
+            else {
+              alert("veuillez saisir une motif et une priorité");
+            }
+          }
+      });
+
+      function supprimer(current) {
+        if(deletable)
+          $(current).remove()
+      }
+
+      $("#motif").keyup(function(){
+        motif = true;
+        $("#contrainte-exemple span").html($(this).val());
+      });
+
+      $("#niveau").change(function(){
+        niveau = true;
+        $("#contrainte-exemple em").html($(this).val());
+      });
+    </script>
+</body>
+</html>

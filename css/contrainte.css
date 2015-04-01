@@ -1,0 +1,34 @@
+#calendar-contraint{
+	border:1px solid lightgrey;
+	width:100%;
+	min-height:500px;
+	text-align:center;
+}
+
+#calendar-contraint th {
+	background-color:lightgrey;
+	text-align:center;
+}
+
+#calendar-contraint tr , #calendar-contraint td {
+	border:1px solid lightgrey;
+	text-align:center;
+}
+
+#calendar-contraint td{
+	
+}
+
+.contrainte{
+	min-width:150px;
+	border:1px solid:grey;
+	background-color:lightblue;
+	padding:5px;
+	border-radius:5px;
+	margin:3px;
+	cursor:pointer;
+}
+
+.btn-info span {
+	margin-right:20px;
+}

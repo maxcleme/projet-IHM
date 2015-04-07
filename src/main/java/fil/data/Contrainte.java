@@ -4,65 +4,80 @@ import org.springframework.data.annotation.Id;
 
 public class Contrainte {
 
-    @Id
-    private String  id;
+	@Id
+	private String id;
 
-    private String  idUser;
+	private String idUser;
 
-    private String  motif;
+	private String motif;
 
-    private Integer importance;
+	private Integer importance;
 
-    public Contrainte() {
+	/*
+	 * Timestamp
+	 */
+	private int debut;
 
-    }
+	/*
+	 * Timestamp
+	 */
+	private int fin;
 
-    public Contrainte( final String pId , final String pIdUser , final String pMotif , final int pImportance ) {
-        this( pIdUser, pMotif, pImportance );
-        this.id = pId;
-    }
+	public Contrainte() {
 
-    public Contrainte( final String pIdUser , final String pMotif , final int pImportance ) {
-        this.idUser = pIdUser;
-        this.motif = pMotif;
-        this.importance = pImportance;
-    }
+	}
 
-    public Contrainte( final String pId , final String pIdUser ) {
-        this.id = pId;
-        this.idUser = pIdUser;
-    }
+	public Contrainte(final String pId, final String pIdUser,
+			final String pMotif, final int pImportance, final int pDebut,
+			final int pFin) {
+		this(pIdUser, pMotif, pImportance, pDebut, pFin);
+		this.id = pId;
+	}
 
-    public int getImportance() {
-        return this.importance;
-    }
+	public Contrainte(final String pIdUser, final String pMotif,
+			final int pImportance, final int pDebut, final int pFin) {
+		this.idUser = pIdUser;
+		this.motif = pMotif;
+		this.importance = pImportance;
+		this.debut = pDebut;
+		this.fin = pFin;
+	}
 
-    public void setImportance( final int pImportance ) {
-        this.importance = pImportance;
-    }
+	public Contrainte(final String pId, final String pIdUser) {
+		this.id = pId;
+		this.idUser = pIdUser;
+	}
 
-    public String getId() {
-        return this.id;
-    }
+	public int getImportance() {
+		return this.importance;
+	}
 
-    public void setId( final String pId ) {
-        this.id = pId;
-    }
+	public void setImportance(final int pImportance) {
+		this.importance = pImportance;
+	}
 
-    public String getIdUser() {
-        return this.idUser;
-    }
+	public String getId() {
+		return this.id;
+	}
 
-    public void setIdUser( final String pIdUser ) {
-        this.idUser = pIdUser;
-    }
+	public void setId(final String pId) {
+		this.id = pId;
+	}
 
-    public String getMotif() {
-        return this.motif;
-    }
+	public String getIdUser() {
+		return this.idUser;
+	}
 
-    public void setMotif( final String pMotif ) {
-        this.motif = pMotif;
-    }
+	public void setIdUser(final String pIdUser) {
+		this.idUser = pIdUser;
+	}
+
+	public String getMotif() {
+		return this.motif;
+	}
+
+	public void setMotif(final String pMotif) {
+		this.motif = pMotif;
+	}
 
 }

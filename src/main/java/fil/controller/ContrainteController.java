@@ -13,36 +13,47 @@ import fil.data.Contrainte;
 import fil.repository.ContrainteRepository;
 
 @RestController
-@RequestMapping( "/contrainte" )
+@RequestMapping("/contrainte")
 public class ContrainteController {
 
-    @Autowired
-    private ContrainteRepository contrainteRepository;
+	@Autowired
+	private ContrainteRepository contrainteRepository;
 
-    @RequestMapping( value = "/add/{idUser}" , method = RequestMethod.POST )
-    public Contrainte create( @PathVariable( "idUser" ) final String idUser , @RequestParam( "motif" ) final String motif , @RequestParam( "importance" ) final int importance ) {
-        final Contrainte contrainte = new Contrainte( idUser, motif, importance );
-        this.contrainteRepository.save( contrainte );
-        return contrainte;
-    }
+	@RequestMapping(value = "/add/{idUser}", method = RequestMethod.POST)
+	public Contrainte create(@PathVariable("idUser") final String idUser,
+			@RequestParam("motif") final String motif,
+			@RequestParam("debut") final int debut,
+			@RequestParam("fin") final int fin,
+			@RequestParam("importance") final int importance) {
+		final Contrainte contrainte = new Contrainte(idUser, motif, importance,
+				debut, fin);
+		this.contrainteRepository.save(contrainte);
+		return contrainte;
+	}
 
-    @RequestMapping( value = "/list/{idUser}" , method = RequestMethod.GET )
-    public List< Contrainte > read( @PathVariable( "idUser" ) final String idUser ) {
-        return this.contrainteRepository.findByIdUser( idUser );
+	@RequestMapping(value = "/list/{idUser}", method = RequestMethod.GET)
+	public List<Contrainte> read(@PathVariable("idUser") final String idUser) {
+		return this.contrainteRepository.findByIdUser(idUser);
 
-    }
+	}
 
-    @RequestMapping( value = "/update/{idUser}" , method = RequestMethod.POST )
-    public Contrainte update( @PathVariable( "idUser" ) final String idUser , @RequestParam( "id" ) final String id , @RequestParam( "motif" ) final String motif ,
-            @RequestParam( "importance" ) final String importance ) {
-        final Contrainte contrainte = new Contrainte( id, idUser, motif, Integer.parseInt( importance ) );
-        this.contrainteRepository.save( contrainte );
-        return contrainte;
-    }
+	@RequestMapping(value = "/update/{idUser}", method = RequestMethod.POST)
+	public Contrainte update(@PathVariable("idUser") final String idUser,
+			@RequestParam("id") final String id,
+			@RequestParam("motif") final String motif,
+			@RequestParam("debut") final int debut,
+			@RequestParam("fin") final int fin,
+			@RequestParam("importance") final String importance) {
+		final Contrainte contrainte = new Contrainte(id, idUser, motif, debut,
+				fin, Integer.parseInt(importance));
+		this.contrainteRepository.save(contrainte);
+		return contrainte;
+	}
 
-    @RequestMapping( value = "/delete/{idUser}/{idContrainte}" , method = RequestMethod.DELETE )
-    public void remove( @PathVariable( "idUser" ) final String idUser , @PathVariable( "idContrainte" ) final String id ) {
-        this.contrainteRepository.delete( new Contrainte( id, idUser ) );
-    }
+	@RequestMapping(value = "/delete/{idUser}/{idContrainte}", method = RequestMethod.DELETE)
+	public void remove(@PathVariable("idUser") final String idUser,
+			@PathVariable("idContrainte") final String id) {
+		this.contrainteRepository.delete(new Contrainte(id, idUser));
+	}
 
 }

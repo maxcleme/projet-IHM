@@ -33,3 +33,22 @@
 .btn-info span {
 	margin-right:20px;
 }
+
+#draggable-div{
+	float:right;
+	border:1px solid grey;
+	padding:5px;
+	padding-left:15px;
+	padding-right:15px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.supprimable:hover{
+	background-color:red;
+}
+
+.jumbotron{
+	padding-bottom:85px;
+}

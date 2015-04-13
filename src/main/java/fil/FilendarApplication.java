@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import fil.data.TimeTable;
 import fil.repository.TimeTableRepository;
 
 @SpringBootApplication
@@ -27,6 +28,11 @@ public class FilendarApplication implements CommandLineRunner {
 
     @Override
     public void run( final String... pArg0 ) throws Exception {
-        //        this.timeTableRepository.deleteAll();
+    	this.timeTableRepository.deleteAll();
+    	
+    	for(int i = 1; i <= 11; i++) {
+    		this.timeTableRepository.save(new TimeTable("Emploi du temps " + i, "edt" + i + ".png", 0));
+    	}
+    	
     }
 }

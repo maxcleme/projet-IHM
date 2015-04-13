@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Filandar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/contrainte.css" media="screen">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+     
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
+      <script src="../bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand">Filandar - <strong>Votre</strong> calendrier</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 100px;">
+      <div class="jumbotron">
+          <h2>Votez pour votre emploi du temps préféré</h2>
+          <p style="font-size: 16px">
+            La date limite pour l'ajout de vos contraintes d'emploi du temps est dépassé, veuillez maintenant voter pour le planning qui vous convient le plus.
+          </p>
+      </div>
+
+      <div class="jumbotron">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox" id="edts">
+            
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Précédent</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Suivant</span>
+          </a>
+        </div>
+          
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+    $.ajax({
+      method: "GET",
+      url: "/timetable",
+      //data: { name: "John", location: "Boston" }
+    })
+      .success(function(data) {
+        for(var i = 0; i < data.length; i++) {
+          var active = (i == 0) ? ' active' : '';
+
+          $('#edts').append('<div class="item'+active+'">'
+            +'<img src="images/'+data[i].imagePath+'">'
+              +'<div class="carousel-caption">'
+              +'<h2 style="color:#000">Emploi du temps '+i+'</h2>'
+                +'<input type="checkbox">'
+              +'</div>'
+            +'</div>');
+        }
+      });
+    </script>
+</body>
+</html>

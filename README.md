@@ -72,6 +72,8 @@ TODO : Parametrage optionnel sur le GET pour filtrer la liste.
 		POST /add/{idUser}
 		Dans le corp de la requette :
 			- "motif"
+			- "debut"
+			- "fin"
 			- "importance"
 		Retour : Un objet Contrainte
 		
@@ -80,6 +82,8 @@ TODO : Parametrage optionnel sur le GET pour filtrer la liste.
 		Dans le corp de la requette :
 			- "id"
 			- "motif"
+			- "debut"
+			- "fin"
 			- "importance"
 		Retour : Un objet Contrainte
 		

@@ -17,35 +17,39 @@ import fil.data.TimeTable;
 import fil.repository.TimeTableRepository;
 
 @RestController
-@RequestMapping( "/timetable" )
+@RequestMapping("/timetable")
 public class TimeTableController {
 
-    @Autowired
-    TimeTableRepository timeTableRepository;
+	@Autowired
+	TimeTableRepository timeTableRepository;
 
-    @RequestMapping( method = RequestMethod.GET )
-    public List< TimeTable > createTimeTable( @RequestParam( value = "order" , required = false ) final String order ) {
-        if ( order != null ) {
-            if ( "ASC".equals( order.toUpperCase().trim() ) ) {
-                return this.timeTableRepository.findAll( new Sort( Sort.Direction.ASC, "nom" ) );
-            } else if ( "DESC".equals( order.toUpperCase().trim() ) ) {
-                return this.timeTableRepository.findAll( new Sort( Sort.Direction.DESC, "nom" ) );
-            }
-        }
-        return this.timeTableRepository.findAll();
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public List<TimeTable> list(
+			@RequestParam(value = "order", required = false) final String order) {
+		if (order != null) {
+			if ("ASC".equals(order.toUpperCase().trim())) {
+				return this.timeTableRepository.findAll(new Sort(
+						Sort.Direction.ASC, "nom"));
+			} else if ("DESC".equals(order.toUpperCase().trim())) {
+				return this.timeTableRepository.findAll(new Sort(
+						Sort.Direction.DESC, "nom"));
+			}
+		}
+		return this.timeTableRepository.findAll();
+	}
 
-    @RequestMapping( method = RequestMethod.POST )
-    public TimeTable add( @RequestParam( "nom" ) final String nom , @RequestParam( "file" ) final MultipartFile file ) throws IOException {
+	@RequestMapping(method = RequestMethod.POST)
+	public TimeTable add(@RequestParam("nom") final String nom,
+			@RequestParam("file") final MultipartFile file) throws IOException {
 
-        final File tmp = File.createTempFile( file.getOriginalFilename(), "" );
-        final FileOutputStream fos = new FileOutputStream( tmp );
-        fos.write( file.getBytes() );
-        fos.close();
+		final File tmp = File.createTempFile(file.getOriginalFilename(), "");
+		final FileOutputStream fos = new FileOutputStream(tmp);
+		fos.write(file.getBytes());
+		fos.close();
 
-        final TimeTable timeTable = new TimeTable( nom, tmp.getAbsolutePath(), 0 );
-        this.timeTableRepository.save( timeTable );
-        return timeTable;
-    }
+		final TimeTable timeTable = new TimeTable(nom, tmp.getAbsolutePath(), 0);
+		this.timeTableRepository.save(timeTable);
+		return timeTable;
+	}
 
 }

@@ -22,6 +22,7 @@
     <div class="container" style="margin-top: 100px;">
    
       <div class="jumbotron form-horizontal"  id="div-ajouter-contrainte">
+        <a  style="float:center;color:red;font-weight:bold;" id="chrono" href="votes_profs.html"></a>
          <span id="log" style="float:right;color:black;" >enregistré</span>
         <h3>Ajouter une contrainte</h3>
         <div class="col-md-4 form-group">
@@ -76,6 +77,15 @@
     <script src="js/jquery-ui.min.js"></script>
     <script>
 
+      function chrono(time) {
+        var d = new Date(time)
+
+        $("#chrono").html( "Il reste " + d.getHours() + "h" + d.getMinutes() + "m" + d.getSeconds() +  "s pour ajouter vos contraintes de temps"  );
+
+        setTimeout('chrono('  +  (time - 1000 ) +')', 1000);
+      }
+      chrono(670000);
+
       var niveau  = false;
       var motif   = false;
       var deletable = true;
@@ -97,6 +107,7 @@
 
       $( "#calendar-contraint td" ).droppable({
           drop: function( event, ui ) {
+            enregistrer();
             if(motif && niveau){
               $(this).append("<span class='supprimable btn btn-info' title='Supprimer' onClick='supprimer(this);'>" + $(ui.draggable).html() + "</span>");
               $(".btn-info").tooltip();
@@ -105,6 +116,16 @@
               alert("veuillez saisir une motif et une priorité");
             }
           }
+      });
+
+      $("td").mouseover(function () {
+        $(this).parent().css("color","blue");
+        $(this).parent().css("text-decoration","underline");
+      });
+
+      $("td").mouseleave(function () {
+        $(this).parent().css("color","black");
+        $(this).parent().css("text-decoration","none");
       });
 
       $("#motif").keyup(function(){

@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/toastr.css" media="screen">
+
+     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/toastr.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -17,7 +23,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../" class="navbar-brand">Filandar - <strong>Votre</strong> calendrier (Espace enseignant)</a>
+          <a href="../" class="navbar-brand">Filandar - <strong>Votre</strong> calendrier</a>
         </div>
       </div>
     </div>
@@ -27,19 +33,19 @@
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
-            <h2>Connectez-vous</h2>
+            <h1>Connectez-vous</h1>
           </div>
         </div>
       </div>
 
-  <form method="POST" action="contrainte.html" >
+  <form method="POST" action="contrainte.html" id="loginForm">
       <div class="col-sm-12">
           <div class="form-group">
 
             <div class="row">
                 <label class="col-sm-2">Identifiant FIL</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" id="inputLogin">
                 </div>
             </div>
 
@@ -55,6 +61,23 @@
       </div>
 
   </form>
+
+  <script type="text/javascript">
+    $('#loginForm').on('submit', function(e){
+    if ( $('#inputLogin').val() == 'prof1' ){
+    $(this).attr('action', 'contrainte.html');
+    }else if ( $('#inputLogin').val() == 'prof2' ){
+    $(this).attr('action', 'votes_profs.html');
+    }else if ( $('#inputLogin').val() == 'etu1' ){
+    $(this).attr('action', 'votes_etudiants.html');
+    }else{
+     e.preventDefault();
+     toastr.error("Login ou mot de passe incorrect");
+    }
+    });
+
+
+  </script>
     </div>
 
 </body>

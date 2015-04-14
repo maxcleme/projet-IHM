@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css" media="screen">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
+
+      
+    <link rel="stylesheet" href="css/toastr.css" media="screen">
+
+     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/toastr.js"></script>
      
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,21 +59,18 @@
               <img src="images/c1.png">
               <div class="carousel-caption">
                 <h2 style="color:#000">Emploi du temps 1</h2>
-                <input type="checkbox">
               </div>
             </div>
             <div class="item">
               <img src="images/c2.png">
               <div class="carousel-caption">
                 <h2 style="color:#000">Emploi du temps 2</h2>
-                <input type="checkbox">
               </div>
             </div>
             <div class="item">
               <img src="images/c3.png">
               <div class="carousel-caption">
                 <h2 style="color:#000">Emploi du temps 3</h2>
-                <input type="checkbox">
               </div>
             </div>
           </div>
@@ -80,15 +85,22 @@
             <span class="sr-only">Suivant</span>
           </a>
         </div>
-          <center>
-            <div>Comparer : <select id="comparateur" autocomplete="off" >
-                              <option selected>Choisir un emploi du temps</option>
+          	<br>
+	<div class="row">
+	   <span class="btn btn-info col-md-4 col-md-offset-4" id="btnVote">Voter pour cette emplois du temps</span>
+	</div>
+	  <br>
+	  <div class="row">
+
+            <div class="col-md-4 col-md-offset-4"><select id="comparateur" autocomplete="off" class="form-control" >
+                              <option selected>Comparer avec un emplois du temps</option>
                               <option>Emploi du temps 1 avec 2 </option>
                               <option>Emploi du temps 1 avec 3 </option>
                               <option>Emploi du temps 2 avec 3 </option>
                             </select>
             </div>
-          </center>
+	    </div>
+
       </div>
     </div>
 
@@ -98,33 +110,25 @@
         <img src="images/cc.png">
       </div>
     </center>
-     <!-- Partie JS -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script>
     $("#comparateur").change(function() {
       $('.modal').modal('show')
     });
 
-   /* $.ajax({
-      method: "GET",
-      url: "/timetable",
-      //data: { name: "John", location: "Boston" }
-    })
-      .success(function(data) {
-        for(var i = 0; i < data.length; i++) {
-          var active = (i == 0) ? ' active' : '';
+    
+$('#btnVote').on('click', function(){
+if ( $(this).hasClass("btn-info")){
+    $(this).switchClass("btn-info", "btn-warning");
+    $(this).text("Annuler votre vote");
+    toastr.success("Votre vote a bien été enregistré");
+   
+}else{
+    $(this).switchClass("btn-warning", "btn-info");
+    $(this).text("Voter pour cette emplois du temps");
+    toastr.success("Votre vote a bien été annulé");
+}
+});
 
-          $('#edts').append('<div class="item'+active+'">'
-            +'<img src="images/'+data[i].imagePath+'">'
-              +'<div class="carousel-caption">'
-              +'<h2 style="color:#000">Emploi du temps '+i+'</h2>'
-                +'<input type="checkbox">'
-              +'</div>'
-            +'</div>');
-        }
-      });*/
     </script>
 </body>
 </html>

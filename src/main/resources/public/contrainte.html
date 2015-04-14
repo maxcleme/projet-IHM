@@ -7,7 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="css/contrainte.css" media="screen">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" media="screen">
+    <link rel="stylesheet" href="css/toastr.css" media="screen">
+
+     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/toastr.js"></script>
+
+
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -23,7 +30,7 @@
    
       <div class="jumbotron form-horizontal"  id="div-ajouter-contrainte">
         <a  style="float:center;color:red;font-weight:bold;" id="chrono" href="votes_profs.html"></a>
-         <span id="log" style="float:right;color:black;" >enregistré</span>
+         
         <h3>Ajouter une contrainte</h3>
         <div class="col-md-4 form-group">
            <input class="form-control col-md-3" name="motif" id="motif" placeholder="Saisir un motif" autocomplete="off"/>
@@ -73,9 +80,7 @@
           </table>
       </div>
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script>
+    <script type="text/javascript">
 
       function chrono(time) {
         var d = new Date(time)
@@ -93,27 +98,25 @@
       $("#contrainte-exemple").draggable({revert : true});
 
       function supprimer(current) {
-        enregistrer();
-        if(deletable)
-          $(current).remove()
+      if(deletable){
+          $(current).remove();
+      }
+      toastr.success("La contrainte a bien été supprimée");
       }
 
       function enregistrer() {
-        $("#log").html("en cours");
-        setTimeout(function() {
-               $("#log").html("enregistré");
-          }, 500);
+      toastr.success("La contrainte a bien été enregistrée");
       }
 
       $( "#calendar-contraint td" ).droppable({
           drop: function( event, ui ) {
-            enregistrer();
             if(motif && niveau){
+      enregistrer();
               $(this).append("<span class='supprimable btn btn-info' title='Supprimer' onClick='supprimer(this);'>" + $(ui.draggable).html() + "</span>");
               $(".btn-info").tooltip();
             }
             else {
-              alert("veuillez saisir une motif et une priorité");
+              toastr.error("veuillez saisir une motif et une priorité");
             }
           }
       });
@@ -136,6 +139,7 @@
       $("#niveau").change(function(){
         niveau = true;
         $("#contrainte-exemple em").html($(this).val());
+      
       }); 
 
       $("#niveau").change(function(){
